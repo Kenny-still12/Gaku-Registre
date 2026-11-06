@@ -5,7 +5,7 @@ import ShiftForm from "../Components/work/ShiftForm"
 export default function Work() {
 
     //useState 
-    const [shift, setShift] = useState({})
+    const [shift, setShift] = useState([])
 
     // hardcoded data for the static UI purpose, subject to deletion 
     const shiftData = [
@@ -28,7 +28,16 @@ export default function Work() {
     ]
 
     function renderCard() {
-        return shiftData.map((shift) => (
+
+        if (shift.length === 0) {
+            return (
+                <div>
+                    <p>Let's plan our work...</p>
+                </div>
+            )
+        }
+
+        return shift.map((shift) => (
             <ShiftCard key={shift.id} shift={shift} />
         ))
     }

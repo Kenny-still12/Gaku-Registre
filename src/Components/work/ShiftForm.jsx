@@ -8,6 +8,7 @@ export default function ShiftForm({ setShift }) {
         shiftStartHour: "",
         shiftEndTime: "",
         shiftBreak: "",
+        status: "",
     })
 
     function addShift(e) {
@@ -20,7 +21,7 @@ export default function ShiftForm({ setShift }) {
         }
 
         console.log(formData)
-
+        setShift(prev => [...prev, formData])
 
     }
 
@@ -29,7 +30,8 @@ export default function ShiftForm({ setShift }) {
 
         setFormData(prevData => ({
             ...prevData,
-            [name]: value
+            [name]: value,
+            status: "incomplete",
         }))
 
     }
