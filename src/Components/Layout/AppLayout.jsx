@@ -4,7 +4,7 @@ import { useState } from "react";
 import MainContent from "./MainContent";
 export default function AppLayout({ children }) {
 
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const toggleSidebar = () => {
         setIsSidebarOpen(prev => !prev)

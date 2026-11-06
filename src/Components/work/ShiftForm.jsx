@@ -31,7 +31,7 @@ export default function ShiftForm({ setShift }) {
         setFormData(prevData => ({
             ...prevData,
             [name]: value,
-            status: "incomplete",
+            status: "completed",
         }))
 
     }

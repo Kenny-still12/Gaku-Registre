@@ -7,32 +7,13 @@ export default function Work() {
     //useState 
     const [shift, setShift] = useState([])
 
-    // hardcoded data for the static UI purpose, subject to deletion 
-    const shiftData = [
-        {
-            id: 1,
-            date: "2026-12-21",
-            startTime: "08:00",
-            endTime: "16:00",
-            breakMinutes: 30,
-            Status: "completed"
-        },
-        {
-            id: 2,
-            date: "2026-10-22",
-            startTime: "09:00",
-            endTime: "15:00",
-            breakMinutes: 30,
-            Status: "completed"
-        },
-    ]
 
     function renderCard() {
 
         if (shift.length === 0) {
             return (
-                <div>
-                    <p>Let's plan our work...</p>
+                <div className="flex justify-center items-center mt-15">
+                    <h1 className="text-3xl italic font-light">Let's plan our work...</h1>
                 </div>
             )
         }
