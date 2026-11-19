@@ -12,16 +12,21 @@ export default function AppLayout({ children }) {
 
     return (
         <div className="flex min-h-screen">
+
             <Sidebar
                 isOpen={isSidebarOpen}
             />
+
             <div className="flex min-w-0 flex-1 flex-col">
+
                 <Header
                     onMenuClick={toggleSidebar}
                 />
+
                 <MainContent>
                     {children}
                 </MainContent>
+
             </div>
         </div>
     )
