@@ -10,7 +10,7 @@ export default function Sidebar({ isOpen }) {
                 ? "w-64 px-6"
                 : "w-0 px-0"}`} >
             <div className="flex flex-col gap-10">
-                <Logo />
+                <Logo variant="ring" />
                 <nav aria-label="Main navigation" >
                     <ul className="flex flex-col gap-2 ">
                         <li ><a

@@ -39,7 +39,7 @@ export default function ShiftCard({ shift }) {
     //     }
     // }
 
-    convertHour(startHour, startMin)
+    //convertHour(startHour, startMin)
 
     return (
         // main container
