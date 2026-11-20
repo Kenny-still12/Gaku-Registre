@@ -1,8 +1,19 @@
 import { Menu, Search, Bell, User } from "lucide-react"
+import { useLocation } from "react-router-dom";
 
 
 export default function Header({ onMenuClick }) {
 
+    const location = useLocation();
+
+    const pageNames = {
+        "/": "Dashboard",
+        "/work": "Work",
+        "/money": "Money",
+        "/study": "Study",
+    };
+
+    const currentPage = pageNames[location.pathname] || Menu;
 
     return (
         <header className=" w-full flex gap-2 items-center justify-between p-2">
@@ -13,7 +24,7 @@ export default function Header({ onMenuClick }) {
                 >
                     <Menu />
                 </button>
-                <h1 className="line-clamp-1">menu name will be displayed</h1>
+                <h1 className="line-clamp-1">{currentPage}</h1>
             </div>
 
             <div className="flex items-center gap-4">
