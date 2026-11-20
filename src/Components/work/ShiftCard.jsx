@@ -25,22 +25,6 @@ export default function ShiftCard({ shift }) {
     console.log("start hour " + startHour, startMin + ", end hour" + shiftEndTime)
     console.log(typeof (endHour))
 
-    // converts military hour to 12 hour 
-    // function convertHour(hour, min) {
-    //     const numHour = Number(hour)
-    //     const numMin = Number(min)
-
-    //     console.log(numHour + "is " + typeof (numHour))
-    //     console.log(numMin + "is " + typeof (numMin))
-
-    //     if (numHour === 0 && numMin < 60) {
-    //         numHour = numHour + 12
-    //         return numHour
-    //     }
-    // }
-
-    //convertHour(startHour, startMin)
-
     return (
         // main container
         <section className="bg-neutral-800 rounded-xl border border-neutral-600 p-5 sm:p-6">
