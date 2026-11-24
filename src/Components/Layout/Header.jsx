@@ -16,7 +16,7 @@ export default function Header({ onMenuClick }) {
     const currentPage = pageNames[location.pathname] || Menu;
 
     return (
-        <header className=" w-full flex gap-2 items-center justify-between p-2">
+        <header className=" w-full flex gap-2 items-center justify-between p-2 border-b border-neutral-700/60">
             <div className="flex items-center gap-4">
                 <button
                     type="button"
