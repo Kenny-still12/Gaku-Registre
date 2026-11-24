@@ -120,7 +120,7 @@ export default function ShiftForm({ setShift }) {
             <div className="mt-6 flex justify-end" >
                 <button
                     type="submit"
-                    className="rounded-xl py-2 px-5 bg-green-600 font-medium text-white transition-colors hover:bg-green-500"
+                    className="rounded-xl py-1.5 px-6.5 bg-green-600 font-medium text-white transition-colors hover:bg-green-500"
                 >Add</button>
             </div>
 
