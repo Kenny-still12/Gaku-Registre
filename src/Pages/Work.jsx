@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react"
 import { RiAddLine, RiCalendarScheduleFill } from "react-icons/ri"
-import ShiftCard from "../Components/work/ShiftCard"
+import ShiftList from "../Components/work/ShiftList.jsx"
 import ShiftForm from "../Components/work/ShiftForm"
 import {saveData,loadData} from "../Util/work/localStorageHelper.js"
 
@@ -43,10 +43,7 @@ export default function Work() {
                 </div>
             )
         }
-
-        return shift.map((shift) => (
-            <ShiftCard key={shift.id} shift={shift} />
-        ))
+        return <ShiftList shift={shift}/>
     }
 
 
