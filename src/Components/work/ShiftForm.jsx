@@ -11,18 +11,27 @@ export default function ShiftForm({ setShift }) {
         status: "",
     }
 
+    const fieldLabels = {
+        shiftDate: "Shift date",
+        shiftStartHour: "Start time",
+        shiftEndTime: "End time",
+        shiftBreak: "Break",
+    }
+
     const [formData, setFormData] = useState(initialFormData)
+    const [errors, setErrors] = useState({})
 
     function addShift(e) {
         e.preventDefault();
 
-
-        if (hasEmptyValue(formData)) {
-            console.log("There is a empty value in the data!")
+        const newErrors = getEmptyFieldErrors(formData);
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
             return;
         }
 
-        
+        setErrors({});
+
         setShift(prev => [
             ...prev, 
             {
@@ -43,17 +52,40 @@ export default function ShiftForm({ setShift }) {
             status: "completed",
         }))
 
+        if (errors[name]) {
+            setErrors(prevErrors => {
+                const { [name]: _, ...rest } = prevErrors;
+                return rest;
+            })
+        }
     }
 
-    function hasEmptyValue(formData, ignoreKey = "id") {
-        return Object.entries(formData).some(([value,key]) => {
-            
-            if(key === ignoreKey) return false;
+    function getEmptyFieldErrors(formData) {
+        const newErrors = {};
 
-            return value == null || value.trim() === ""
+        Object.entries(fieldLabels).forEach(([key, label]) => {
+            const value = formData[key];
+            if (value == null || String(value).trim() === "") {
+                newErrors[key] = `${label} is required`;
+            }
         })
-        
-        }
+
+        return newErrors;
+    }
+
+    function inputClassName(name) {
+        const borderClass = errors[name]
+            ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+            : "border-neutral-600 focus:border-green-500 focus:ring-green-500";
+
+        return `w-full rounded-xl border-2 bg-neutral-900 text-white outline-none focus:ring-1 py-2 px-3 ${borderClass}`;
+    }
+
+    function renderError(name) {
+        if (!errors[name]) return null;
+
+        return <p className="text-sm text-red-400">{errors[name]}</p>;
+    }
 
 
     return (
@@ -78,11 +110,12 @@ export default function ShiftForm({ setShift }) {
                         type="date"
                         name="shiftDate"
                         id="shiftDate"
-                        className="w-full rounded-xl border-2 border-neutral-600 bg-neutral-900 text-white outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 py-2 px-3"
+                        className={inputClassName("shiftDate")}
                         value={formData.shiftDate}
                         onChange={(e) => handleChange(e)}
 
                     />
+                    {renderError("shiftDate")}
                 </div>
                 <div
                     className="flex flex-col gap-2"
@@ -95,10 +128,11 @@ export default function ShiftForm({ setShift }) {
                         type="time"
                         name="shiftStartHour"
                         id="shiftStartHour"
-                        className="w-full rounded-xl border-2 border-neutral-600 bg-neutral-900 text-white outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 py-2 px-3"
+                        className={inputClassName("shiftStartHour")}
                         value={formData.shiftStartHour}
                         onChange={(e) => handleChange(e)}
                     />
+                    {renderError("shiftStartHour")}
                 </div>
 
                 <div className="flex flex-col gap-2">
@@ -110,10 +144,11 @@ export default function ShiftForm({ setShift }) {
                         type="time"
                         name="shiftEndTime"
                         id="shiftEndTime"
-                        className="w-full rounded-xl border-2 border-neutral-600 bg-neutral-900 text-white outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 py-2 px-3"
+                        className={inputClassName("shiftEndTime")}
                         value={formData.shiftEndTime}
                         onChange={(e) => handleChange(e)}
                     />
+                    {renderError("shiftEndTime")}
                 </div>
 
                 <div className="flex flex-col gap-2">
@@ -125,10 +160,11 @@ export default function ShiftForm({ setShift }) {
                         type="number"
                         name="shiftBreak"
                         id="shiftBreak"
-                        className="w-full rounded-xl border-2 border-neutral-600 bg-neutral-900 text-white outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 py-2 px-3"
+                        className={inputClassName("shiftBreak")}
                         value={formData.shiftBreak}
                         onChange={(e) => handleChange(e)}
                     />
+                    {renderError("shiftBreak")}
                 </div>
             </div>
 
