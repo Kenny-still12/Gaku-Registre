@@ -1,18 +1,23 @@
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { RiAddLine, RiCalendarScheduleFill } from "react-icons/ri"
 import ShiftCard from "../Components/work/ShiftCard"
 import ShiftForm from "../Components/work/ShiftForm"
+import {saveData,loadData} from "../Util/work/localStorageHelper.js"
 
 export default function Work() {
 
     //useState 
-    const [shift, setShift] = useState([])
+    const [shift, setShift] = useState(()=> loadData("shifts"))
 
     function focusShiftForm() {
         const dateInput = document.getElementById("shiftDate")
         dateInput.scrollIntoView({ behavior: "smooth", block: "center" })
         dateInput.focus({ preventScroll: true })
     }
+
+    useEffect(()=>{
+        saveData("shifts",shift)
+    },[shift])
 
 
     function renderCard() {

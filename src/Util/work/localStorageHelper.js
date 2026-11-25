@@ -1,5 +1,5 @@
 
-export default function saveData(key,data){
+export function saveData(key,data){
     
     
     if(typeof key !== "string" || !key?.trim()){

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function ShiftForm({ setShift }) {
 
@@ -17,6 +17,7 @@ export default function ShiftForm({ setShift }) {
         shiftEndTime: "End time",
         shiftBreak: "Break",
     }
+
 
     const [formData, setFormData] = useState(initialFormData)
     const [errors, setErrors] = useState({})
@@ -59,6 +60,8 @@ export default function ShiftForm({ setShift }) {
             })
         }
     }
+
+
 
     function getEmptyFieldErrors(formData) {
         const newErrors = {};
