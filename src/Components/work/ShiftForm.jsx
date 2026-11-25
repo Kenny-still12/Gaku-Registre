@@ -2,14 +2,16 @@ import { useState } from "react";
 
 export default function ShiftForm({ setShift }) {
 
-    const [formData, setFormData] = useState({
-        id: crypto.randomUUID(),
+    const initialFormData = {
+        id: "",
         shiftDate: "",
         shiftStartHour: "",
         shiftEndTime: "",
         shiftBreak: "",
         status: "",
-    })
+    }
+
+    const [formData, setFormData] = useState(initialFormData)
 
     function addShift(e) {
         e.preventDefault();
@@ -20,9 +22,16 @@ export default function ShiftForm({ setShift }) {
             return;
         }
 
-        console.log(formData)
-        setShift(prev => [...prev, formData])
+        
+        setShift(prev => [
+            ...prev, 
+            {
+                ...formData,
+                id: crypto.randomUUID(),
+            },
+        ])
 
+        setFormData(initialFormData);
     }
 
     function handleChange(e) {
@@ -36,9 +45,15 @@ export default function ShiftForm({ setShift }) {
 
     }
 
-    function hasEmptyValue(formData) {
-        return Object.values(formData).some(value => value.trim() === "")
-    }
+    function hasEmptyValue(formData, ignoreKey = "id") {
+        return Object.entries(formData).some(([value,key]) => {
+            
+            if(key === ignoreKey) return false;
+
+            return value == null || value.trim() === ""
+        })
+        
+        }
 
 
     return (
