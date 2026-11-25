@@ -18,12 +18,15 @@ export default function ShiftCard({ shift }) {
     }
 
     const [year, monthNum, day] = shiftDate.split("-")
-    const [startHour, startMin] = shiftStartHour.split(":")
-    const [endHour, endMin] = shiftEndTime.split(":")
 
-    console.log(shiftDate)
-    console.log("start hour " + startHour, startMin + ", end hour" + shiftEndTime)
-    console.log(typeof (endHour))
+    // "HH:MM" (24-hour) -> "h:MM AM/PM"
+    const to12Hour = (time) => {
+        const [hourStr, min] = time.split(":")
+        const hour = Number(hourStr)
+        const period = hour >= 12 ? "PM" : "AM"
+        const hour12 = hour % 12 || 12
+        return `${hour12}:${min} ${period}`
+    }
 
     return (
         // main container
@@ -57,11 +60,11 @@ export default function ShiftCard({ shift }) {
                 <div className="w-full flex gap-2 rounded-xl p-5 min-w-0">
                     <div className="flex flex-1 flex-col items-start rounded-lg bg-neutral-600 px-2 py-2.5">
                         <h2 className="text-sm text-neutral-500">START TIME</h2>
-                        <p>{shiftStartHour} AM</p>
+                        <p>{to12Hour(shiftStartHour)}</p>
                     </div>
                     <div className="flex flex-1 flex-col items-start rounded-lg bg-neutral-600 px-2 py-2.5" >
                         <h2 className="text-sm text-neutral-500">END TIME</h2>
-                        <p>{shiftEndTime} PM</p>
+                        <p>{to12Hour(shiftEndTime)}</p>
                     </div>
                 </div>
 
